@@ -1,0 +1,1 @@
+{"drop_fields": ["Timestamp"], "unique_fields": [], "label_field": "Label", "benign_label": "Benign", "dst_port": "Dst Port", "ignore_ports": [0, 53, 67, 68, 111, 123, 161, 179, 389, 427, 520, 1723, 1900]}

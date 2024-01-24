@@ -1,0 +1,1 @@
+{"drop_fields": ["pkSeqID", "stime", "saddr", "daddr", "ltime", "sport", "dport", "subcategory", "attack"], "unique_fields": ["flgs", "proto", "state"], "label_field": "category", "benign_label": "Normal", "dst_port": "dport", "ignore_ports": [53, 111, 0, 179, 520, -1]}

@@ -1,0 +1,1 @@
+{"drop_fields": ["appName", "destinationPort", "sourcePort", "source", "destination", "tagApp", "Tag"], "unique_fields": [], "label_field": "reducedTagApp", "benign_label": "Normal", "dst_port": "destinationPort", "ignore_ports": [53, 111, 0, 389, 179, 427, 264, 520, 161, 1900, 67, 68, 123]}
