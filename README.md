@@ -1,6 +1,6 @@
 ## Basic Information
 
-This is a tool designed for auditing the complexity of network data. The tool assumes that the provided dataset file is a CSV of comma separated flow statistics alongside a label field. Many of the tests are comparative, requiring some sensible baseline to evaluate the complexity of a given subset of the dataset. In the case of network intrusion data, the label field may be the attack labels and the baseline traffic may be the benign data.
+This is a tool designed for auditing the issues with network data, based on their flows. The tool assumes that the provided dataset file is a CSV of comma separated flow statistics alongside a label field. Many of the tests are comparative, requiring some sensible baseline to evaluate the complexity of a given subset of the dataset. In the case of network intrusion data, the label field may be the attack labels and the baseline traffic may be the benign data.
 
 ## Metadata Format
 
@@ -42,4 +42,16 @@ Metadata assumes dataset file is comma-separated CSV with labelled columns. Meta
 
 python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence
 
+## Data
 
+We've included a small sample of CIC IDS 2018 to run our tests on. Other datasets should be downloaded from their respective sources.
+
+We've run this tool on, and provide metadata files, for the following datasets:
+
+- [UNSW NB15](https://research.unsw.edu.au/projects/unsw-nb15-dataset)
+- [CIC IDS 2017](https://www.unb.ca/cic/datasets/ids-2017.html)
+- [CSE-CIC IDS 2018](https://www.unb.ca/cic/datasets/ids-2018.html)
+- [ISCX 2012](https://www.unb.ca/cic/datasets/ids.html)
+- [TON IoT](https://research.unsw.edu.au/projects/toniot-datasets)
+- [Bot IoT](https://research.unsw.edu.au/projects/bot-iot-dataset)
+- [ODDS](https://odds.cs.stonybrook.edu/)
