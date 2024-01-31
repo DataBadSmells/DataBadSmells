@@ -38,6 +38,20 @@ Metadata assumes dataset file is comma-separated CSV with labelled columns. Meta
 * KS Test (via KDE Estimate)
 * EM Distance
 
+## Requirements
+
+Start a fresh Python3 virtual environment:
+
+`python -m venv ~/[ENV_NAME]`
+
+Activate the virtual environment:
+
+`source ~/[ENV_NAME]/bin/activate`
+
+Then simply install the requirements found in the `requirements.txt` file:
+
+`pip install -r requirements.txt`
+
 ## Example Commands
 
 - **Metric**: `python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence`
