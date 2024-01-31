@@ -38,9 +38,10 @@ Metadata assumes dataset file is comma-separated CSV with labelled columns. Meta
 * KS Test (via KDE Estimate)
 * EM Distance
 
-## Example Command
+## Example Commands
 
-python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence
+- **Metric**: `python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence`
+- **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18/ --target FTP-BruteForce --folder --csv data/CIC18/  --test CosineTest` 
 
 ## Data
 
