@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 
 import data_manip
 import ml
-from src.utils import get_ordered_unique_values
 import utils
 import metrics
 import pandas as pd
@@ -45,8 +44,8 @@ class CosineTest(BaseTest):
     def __init__(self):
         super(CosineTest, self).__init__("Cosine Similarity Test",
                                          "Approximates cluster size of input flows, returning a result between 0 and 1.\
-                                          We also track the number of flows that are effectively identical (according to \
-                                          some cut-off value), returning a result between 0 and 1", 
+We also track the number of flows that are effectively identical (according to \
+some cut-off value), returning a result between 0 and 1", 
                                           "Repetitiveness")
 
     def cosine_similarity(self, data, num_points=1000):
@@ -57,7 +56,7 @@ class CosineTest(BaseTest):
         separated_results_list = []
         results_dict = {}
         clusters = data['Cluster']
-        cluster_list, cluster_value_list = get_ordered_unique_values(clusters)
+        cluster_list, cluster_value_list = utils.get_ordered_unique_values(clusters)
 
         for cluster_value in cluster_list:
             result_list = []
@@ -126,7 +125,7 @@ class CosineTest(BaseTest):
 class PortTest(BaseTest):
     def __init__(self):
         super(PortTest, self).__init__("Port Test", "Returns the percentage of flows associated with\
-                                                     background traffic according to their destination port number.",
+background traffic according to their destination port number.",
                                                     "Mislabelled")
 
     def pipeline(self, df, metadata, target):
@@ -155,8 +154,8 @@ class BackwardPacketsTest(BaseTest):
     def __init__(self):
         super(BackwardPacketsTest, self).__init__(
             "Backward Packets", "Returns the percentage of flows with no packets \
-                                 in the backwards (server to host) direction.",
-                                "Mislabelled")
+in the backwards (server to host) direction.",
+            "Mislabelled")
 
     def pipeline(self, df, metadata, target):
         """
@@ -177,8 +176,8 @@ class NearestNeighboursTest(BaseTest):
     def __init__(self):
         super(NearestNeighboursTest, self).__init__(
             "Nearest Neighbours Test", "Returns the percentage of flows that are\
-                                        mislabelled according to the Edited Nearest\
-                                        Neighbours Criteria.",
+mislabelled according to the Edited Nearest\
+Neighbours Criteria.",
                                        "Mislabelled")
 
     def mislabelNN(self, df, metadata, target, num_points=1000000):
@@ -230,9 +229,9 @@ class RollingImportancesTest(BaseTest):
     def __init__(self):
         super(RollingImportancesTest, self).__init__("Rolling Importances Test", 
                                                      "Orders features according to mutual information\
-                                                      and then measures efficacy of 5 features together\
-                                                      for classification using random forest. Outputs JSON file \
-                                                      with F1 score for each group of 5 features. (Unused, not particularly useful)",
+and then measures efficacy of 5 features together\
+for classification using random forest. Outputs JSON file \
+with F1 score for each group of 5 features. (Unused, not particularly useful)",
                                                       "Simulation Artefacts")
 
     def pipeline(self, df, metadata, target):
@@ -260,7 +259,7 @@ class DropRollingImportancesTest(BaseTest):
     def __init__(self):
         super(DropRollingImportancesTest, self).__init__("Rolling Importances With Drop Test", 
                                                          "Rolling Importances with Drop. (Unused,\
-                                                         not particularly useful)", 
+not particularly useful)", 
                                                          "Simulation Artefacts")
 
     def pipeline(self, df, metadata, target):
@@ -296,9 +295,9 @@ class SingleFeatureEfficacyTest(BaseTest):
     def __init__(self):
         super(SingleFeatureEfficacyTest, self).__init__("Single Feature Efficacy Test",
                                                         "Orders features according to mutual\
-                                                        information and trains a random forest\
-                                                        for classification on a single feature.\
-                                                        Outputs JSON file with F1 score for each feature",
+information and trains a random forest\
+for classification on a single feature.\
+Outputs JSON file with F1 score for each feature",
                                                         "Simulation Artefacts")
 
     def pipeline(self, df, metadata, target):
@@ -323,7 +322,7 @@ class CorrelationTest(BaseTest):
     def __init__(self):
         super(CorrelationTest, self).__init__("Correlation Test",
                                               "Calculate correlations between\
-                                              features (Unused, not useful)",
+features (Unused, not useful)",
                                               "Other")
 
     def pipeline(self, df, metadata, target, rearrange=False, importances=None):
