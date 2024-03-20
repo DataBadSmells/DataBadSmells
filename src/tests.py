@@ -58,7 +58,7 @@ some cut-off value), returning a result between 0 and 1",
         clusters = data['Cluster']
         cluster_list, cluster_value_list = utils.get_ordered_unique_values(clusters)
 
-        for cluster_value in cluster_list:
+        for cluster_value in range(0, len(cluster_list)):
             result_list = []
             cluster_data = data[data['Cluster'] == cluster_value]
             for _ in range(0, num_points):
@@ -140,6 +140,9 @@ background traffic according to their destination port number.",
         for port in unique_ports:
             tot_count += df[(df[label_field] == target) &
                             (df[dport] == port)].shape[0]
+        tot_count += df[(df[label_field] == target)][dport].isnull().sum() # Also count np.nan
+        tot_count += df[(df[label_field] == target) &
+                            (df[dport] == "")].shape[0] # Also count Empty
         results_dict["MislabelPorts"] = tot_count # Return total number of flows
         results_dict["MislabelPortsPercent"] = (tot_count / df[df[label_field] == target].shape[0]) # Return the percentage of flows
         return results_dict

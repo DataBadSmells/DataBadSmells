@@ -2,6 +2,53 @@
 
 This is a tool designed for auditing the issues with network data, based on their flows. The tool assumes that the provided dataset file is a CSV of comma separated flow statistics alongside a label field. Many of the tests are comparative, requiring some sensible baseline to evaluate the complexity of a given subset of the dataset. In the case of network intrusion data, the label field may be the attack labels and the baseline traffic may be the benign data.
 
+## Requirements
+
+Start a fresh Python3 virtual environment:
+
+`python -m venv ~/[ENV_NAME]`
+
+Activate the virtual environment:
+
+`source ~/[ENV_NAME]/bin/activate`
+
+Then simply install the requirements found in the `requirements.txt` file:
+
+`pip install -r requirements.txt`
+
+## Data
+
+We've included a small sample of *CIC IDS 2018* to run our tests on. Other datasets need to be downloaded from their respective sources.
+
+We've run this tool on, and provide metadata files, for the following datasets:
+
+- [UNSW NB15](https://research.unsw.edu.au/projects/unsw-nb15-dataset)
+- [CIC IDS 2017](https://www.unb.ca/cic/datasets/ids-2017.html)
+- [CSE-CIC IDS 2018](https://www.unb.ca/cic/datasets/ids-2018.html)
+- [ISCX 2012](https://www.unb.ca/cic/datasets/ids.html)
+- [TON IoT](https://research.unsw.edu.au/projects/toniot-datasets)
+- [Bot IoT](https://research.unsw.edu.au/projects/bot-iot-dataset)
+- [CTU 13](https://www.stratosphereips.org/datasets-ctu13)
+- [ODDS](https://odds.cs.stonybrook.edu/)
+
+
+## Example Commands#
+
+(NB: see 'Data' section above. These commands will only work if the necessary data is downloaded and provided correctly. We've included a small sample of *CIC IDS 2018* to run our tests on.)
+
+- **Metric**: `python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence`
+- **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18/ --target FTP-BruteForce --folder --csv data/CIC18/  --test CosineTest`
+
+A list of valid options for the `--metric` and `--test` flags can be found in the *Metrics* and *Tests* sections below.
+
+Our heuristics tests can be batch run for each dataset via the files in the `scripts/` folder.
+
+- **Batch Tests**: `./scripts/CIC18_calculations.sh`
+
+## Other
+
+We provide other files necessary to recreate our experimentation/metric calculation can be found in `nb/`. More details can be found in the README in `nb/`
+
 ## Metadata Format
 
 Metadata assumes dataset file is comma-separated CSV with labelled columns. Metadata format is JSON.
@@ -37,36 +84,3 @@ Metadata assumes dataset file is comma-separated CSV with labelled columns. Meta
 * KS Test
 * KS Test (via KDE Estimate)
 * EM Distance
-
-## Requirements
-
-Start a fresh Python3 virtual environment:
-
-`python -m venv ~/[ENV_NAME]`
-
-Activate the virtual environment:
-
-`source ~/[ENV_NAME]/bin/activate`
-
-Then simply install the requirements found in the `requirements.txt` file:
-
-`pip install -r requirements.txt`
-
-## Example Commands
-
-- **Metric**: `python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence`
-- **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18/ --target FTP-BruteForce --folder --csv data/CIC18/  --test CosineTest` 
-
-## Data
-
-We've included a small sample of CIC IDS 2018 to run our tests on. Other datasets should be downloaded from their respective sources.
-
-We've run this tool on, and provide metadata files, for the following datasets:
-
-- [UNSW NB15](https://research.unsw.edu.au/projects/unsw-nb15-dataset)
-- [CIC IDS 2017](https://www.unb.ca/cic/datasets/ids-2017.html)
-- [CSE-CIC IDS 2018](https://www.unb.ca/cic/datasets/ids-2018.html)
-- [ISCX 2012](https://www.unb.ca/cic/datasets/ids.html)
-- [TON IoT](https://research.unsw.edu.au/projects/toniot-datasets)
-- [Bot IoT](https://research.unsw.edu.au/projects/bot-iot-dataset)
-- [ODDS](https://odds.cs.stonybrook.edu/)

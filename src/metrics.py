@@ -7,8 +7,6 @@ import scipy.special as sp
 from sklearn.feature_selection import mutual_info_classif
 import data_manip
 
-#from graphs import saveHist
-
 class BaseMetric():
     def __init__(self, name, description, metric_type):
         self.metric_name = name
@@ -96,9 +94,7 @@ class JSDivergence(BaseMetric):
     def apply_metric(self, data1, data2, num_points=100):
         try:
             xs, p1, p2 = get_points(data1, data2, num_points)
-            #m = (p1 + p2) / 2
             score = jensenshannon(p1, p2)
-            #score = ((self._kl_div(xs, p1, m)) + (self._kl_div(xs, p2, m))/2)**0.5
         except:
             score = None
         return score

@@ -49,7 +49,7 @@ def readMetadata(_file: str):
         return json.load(md)
 
 
-def _reformatForML(df: pd.DataFrame, drop_fields: list, unique_fields: list, label_field: str, benign_label:str,  target: str):
+def _reformatForML(df: pd.DataFrame, drop_fields: list, unique_fields: list, label_field: str, benign_label:str, keep_nan:bool, target: str):
     """
     Reformat DataFrame for Machine Learning algorithms
     """
@@ -57,8 +57,12 @@ def _reformatForML(df: pd.DataFrame, drop_fields: list, unique_fields: list, lab
     print("[*] Dropping Drop Fields")
     df = df.drop(drop_fields, axis=1)
     print("[*] Dropping and replacing NaNs/Infs")
-    df = df.replace(np.inf, np.nan)
-    df = df.dropna()
+    if keep_nan:
+        df = df.replace(np.inf, np.nan)
+        df = df.replace(np.nan, 0)
+    else:
+        df = df.replace(np.inf, np.nan)
+        df = df.dropna()
     print("[*] Saving and dropping Label Field")
     labels = df[label_field]
     df = df.drop(label_field, axis=1)
@@ -88,7 +92,10 @@ def reformatForML(df: pd.DataFrame, metadata: dict, target: str):
     """
     Reformat DataFrame for Machine Learning algorithms
     """
-    df, labels = _reformatForML(df, metadata["drop_fields"], metadata["unique_fields"], metadata["label_field"], metadata["benign_label"], target)
+    keep_nan=False
+    if "keep_nan" in metadata:
+        keep_nan = True
+    df, labels = _reformatForML(df, metadata["drop_fields"], metadata["unique_fields"], metadata["label_field"], metadata["benign_label"], keep_nan, target)
     return df, labels
 
 def reformatForClustering(df, metadata, targets):
@@ -113,8 +120,12 @@ def reformatForClustering(df, metadata, targets):
     df = df.loc[df[label_field].isin(targets), :]
     df = df.drop(drop_labels, axis=1)
     print("[*] Dropping and replacing NaNs/Infs")
-    df = df.replace(np.inf, np.nan)
-    df = df.dropna()
+    if "keep_nan" in metadata: 
+        df = df.replace(np.inf, np.nan)
+        df = df.replace(np.nan, 0)
+    else:
+        df = df.replace(np.inf, np.nan)
+        df = df.dropna()
     if unique_fields is not None:
         for field in unique_fields:
             print("Enumerating field: {}".format(field))
@@ -169,7 +180,12 @@ def reformatForCosine(df, metadata, target, sample=0.5):
         if data[col].isnull().all():
             data = data.drop([col], axis=1)
     print("[*] Dropping and replacing NaNs/Infs")
-    data = data.replace(np.inf, pd.NA).dropna()
+    if "keep_nan" in metadata: 
+        data = data.replace(np.inf, np.nan)
+        data = data.replace(np.nan, 0)
+    else:
+        data = data.replace(np.inf, np.nan)
+        data = data.dropna()
     print("[*] Finished Reformating for Cosine Similarity")
     return data
 
