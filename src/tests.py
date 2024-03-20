@@ -143,8 +143,8 @@ background traffic according to their destination port number.",
         tot_count += df[(df[label_field] == target)][dport].isnull().sum() # Also count np.nan
         tot_count += df[(df[label_field] == target) &
                             (df[dport] == "")].shape[0] # Also count Empty
-        results_dict["MislabelPorts"] = tot_count # Return total number of flows
-        results_dict["MislabelPortsPercent"] = (tot_count / df[df[label_field] == target].shape[0]) # Return the percentage of flows
+        results_dict["MislabelPorts"] = int(tot_count) # Return total number of flows
+        results_dict["MislabelPortsPercent"] = (int(tot_count) / df[df[label_field] == target].shape[0]) # Return the percentage of flows
         return results_dict
 
 
@@ -462,14 +462,25 @@ class CompleteTest(BaseTest):
 
         results_dict = {}
 
-        with utils.Spinner(): 
+        try:
             print("[!] Running Cosine Test")
             results_dict["CosineTest"] = cosine.pipeline(df, metadata, target, 500)
+        except:
+            results_dict["CosineTest"] = "Error!"
+        try:
             print("[!] Running Mislabelled Ports Test")
             results_dict["MislabelPortsTest"] = ports.pipeline(df, metadata, target)
+        except:
+            results_dict["MislabelPortsTest"] = "Error!"
+        try:
             print("[!] Running Mislabelled Test")
             results_dict["MislabelTest"] = nn.pipeline(df, metadata, target, 500)
+        except:
+            results_dict["MislabelTest"] = "Error!"
+        try:
             print("[!] Running Importances Test")
             results_dict["SingleFeatureEfficacy"] = sing.pipeline(df, metadata, target)
+        except:
+            results_dict["SingleFeatureEfficacy"] = "Error!"
 
         return results_dict
