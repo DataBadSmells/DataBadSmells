@@ -139,7 +139,7 @@ def reformatForClustering(df, metadata, targets):
     print("[*] Saving and dropping Label Field")
     labels = df[label_field]
     df = df.drop(label_field, axis=1)
-    print("Preprocessed!")
+    print("[*] Preprocessed!")
     return df, labels
 
 def reformatForDiv(df=None, metadata=None):

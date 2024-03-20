@@ -73,11 +73,13 @@ class KLDivergence(BaseMetric):
 
     def apply_metric(self, data1, data2, num_points = 100):
         try:
+            print("\t[*] Sampling Points")
             xs, p1, p2 = get_points(data1, data2, num_points)
             #score = self._kl_div(xs, p1, p2)
+            print("\t[*] Calculating Entropy")
             score = entropy(p1, p2)
         except Exception as e:
-            print(e)
+            print("\t[!] Error: Singular Matrix or Missing Class")
             score = None
         return score
 

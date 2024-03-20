@@ -36,14 +36,14 @@ We've run this tool on, and provide metadata files, for the following datasets:
 
 (NB: see 'Data' section above. These commands will only work if the necessary data is downloaded and provided correctly. We've included a small sample of *CIC IDS 2018* to run our tests on.)
 
-- **Metric**: `python3 src/netstats.py --metadata metadata/cic/metadata.json --target PortScan  --results results/CIC/ --folder --csv data/CIC/ --metric KLDivergence`
-- **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18/ --target FTP-BruteForce --folder --csv data/CIC18/  --test CosineTest`
+- **Metric**: `python3 src/netstats.py --metadata metadata/cic2018/metadata.json --target Bot  --results results/CIC18_trunc/ --folder --csv data/CIC18_trunc/ --metric KLDivergence`
+- **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18_trunc/ --target FTP-BruteForce --folder --csv data/CIC18_trunc/  --test CosineTest`
 
 A list of valid options for the `--metric` and `--test` flags can be found in the *Metrics* and *Tests* sections below.
 
 Our heuristics tests can be batch run for each dataset via the files in the `scripts/` folder.
 
-- **Batch Tests**: `./scripts/CIC18_calculations.sh`
+- **Batch Tests**: `./scripts/CIC18_trunc_calculations.sh`
 
 ## Other
 
@@ -64,11 +64,11 @@ Metadata assumes dataset file is comma-separated CSV with labelled columns. Meta
 
 * Cosine Test: Approximate cluster size and ratio of identical flows. Outputs one result for each. Both in range $[0,1]$
 * Port Test: Percentage of background flows to benign flows, based off of ignore_ports ports. Outputs single result in range $[0,1]$
-* Backwards Packets Test: Percentage of flows with no backwards packets to total flows. Outputs single result in range $[0,1]$
 * Nearest Neighbours Test: Percentage of flows that are misclassified according to the Edited Nearest Neighbours criteria. Outputs single result in range $[0,1]$
-* Rolling Importances Test: Order features according to mutual information, measure efficacy of 5 features together for classification using random forest. Outputs JSON file with F1 score for each group of 5 features
-* Single Feature Efficacy Test: Same as above, but considering only a single feature to train our random forest. Outputs JSON file with F1 score for each feature.
-* Siamese Network: Measure rate of F1 gain of a few-shot learning siamese network
+* Single Feature Efficacy Test: Considers only a single feature to train our random forest. Outputs JSON file with F1 score for each feature.
+* Rolling Importances Test: Order features according to mutual information, measure efficacy of 5 features together for classification using random forest. Outputs JSON file with F1 score for each group of 5 features - **Unused/Untested**
+* Backwards Packets Test: Percentage of flows with no backwards packets to total flows. Outputs single result in range $[0,1]$ - **Unused/Untested**
+* Siamese Network: Measure rate of F1 gain of a few-shot learning siamese network - **Unused/Untested**
 
 ## Metrics
 
