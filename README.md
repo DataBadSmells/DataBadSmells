@@ -34,7 +34,7 @@ We've run this tool on, and provide metadata files, for the following datasets:
 
 ## Example Commands#
 
-(NB: see 'Data' section above. These commands will only work if the necessary data is downloaded and provided correctly. We've included a small sample of *CIC IDS 2018* to run our tests on.)
+(NB: see 'Data' section above. These commands will only work if the necessary data is downloaded and provided correctly. We've included a small sample of *CIC IDS 2018* to run our tests on, but this must be extracted from the provided zip file!)
 
 - **Metric**: `python3 src/netstats.py --metadata metadata/cic2018/metadata.json --target Bot  --results results/CIC18_trunc/ --folder --csv data/CIC18_trunc/ --metric KLDivergence`
 - **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18_trunc/ --target FTP-BruteForce --folder --csv data/CIC18_trunc/  --test CosineTest`
