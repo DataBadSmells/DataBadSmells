@@ -1,6 +1,6 @@
 ## Basic Information
 
-This is a tool designed for auditing the issues with network data, based on their flows. The tool assumes that the provided dataset file is a CSV of comma separated flow statistics alongside a label field. Many of the tests are comparative, requiring some sensible baseline to evaluate the complexity of a given subset of the dataset. In the case of network intrusion data, the label field may be the attack labels and the baseline traffic may be the benign data.
+This is a tool designed for auditing the issues with network data, based on their flows. **This tool can be used to run a series of tests on network data: these are the CosineTest, PortTest, SingleFeatureEfficacyTest and NearwestNeighboursTest, detailed below. We have provided a subset of CIC IDS 18 to run these tests, in zipped format, in the `data/` directory.** The tool assumes that the provided dataset file is a CSV of comma separated flow statistics alongside a label field. Many of the tests are comparative, requiring some sensible baseline to evaluate the complexity of a given subset of the dataset. In the case of network intrusion data, the label field may be the attack labels and the baseline traffic may be the benign data.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ We've run this tool on, and provide metadata files, for the following datasets:
 
 ## Example Commands#
 
-(NB: see 'Data' section above. These commands will only work if the necessary data is downloaded and provided correctly. We've included a small sample of *CIC IDS 2018* to run our tests on, but this must be extracted from the provided zip file!)
+(NB: see 'Data' section above. These commands will only work if the necessary data is downloaded and provided correctly. We've included a small sample of *CIC IDS 2018* to run our tests on, but this must be extracted from the provided zip file in the `data/` directory!)
 
 - **Metric**: `python3 src/netstats.py --metadata metadata/cic2018/metadata.json --target Bot  --results results/CIC18_trunc/ --folder --csv data/CIC18_trunc/ --metric KLDivergence`
 - **Test**: `python3 ./src/netstats.py --metadata metadata/cic2018/metadata.json --results results/CIC18_trunc/ --target FTP-BruteForce --folder --csv data/CIC18_trunc/  --test CosineTest`
